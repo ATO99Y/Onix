@@ -16,3 +16,7 @@ this is a Basic Login Page For Website builders we recommend the latest version 
 1.1: Added logo and updated styles
 1.2: Added settings button and update log
 1.3: Bug fixes and creator information added
+
+# Onix Lite
+
+new and improved Onix But with limitations and its still under development
