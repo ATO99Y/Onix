@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            margin: 0;
+            font-family: 'Arimo', sans-serif;
+            color: #fff;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar button {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Arimo', sans-serif;
+        }
+        .navbar button:hover {
+            background-color: #555;
+        }
+        .container {
+            background-color: #333;
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 350px; 
+            text-align: center;
+            margin-top: 20px;
+        }
+        .container h2 {
+            margin-bottom: 20px;
+        }
+        .container input[type="text"],
+        .container input[type="password"],
+        .container button {
+            width: calc(100% - 24px); 
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid white;
+            border-radius: 5px;
+            box-sizing: border-box; 
+            font-family: 'Arimo', sans-serif;
+        }
+        .container input[type="text"]::placeholder,
+        .container input[type="password"]::placeholder {
+            color: #bbb;
+        }
+        .container button {
+            background-color: #06c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #005bb5;
+        }
+        .container a {
+            display: block;
+            margin: 10px 0;
+            color: #06c;
+            text-decoration: none;
+            font-family: 'Arimo', sans-serif;
+        }
+        .container a:hover {
+            text-decoration: underline;
+        }
+        .container .alternate-button {
+            background-color: #444;
+        }
+        .container .alternate-button:hover {
+            background-color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-family: 'Arimo', sans-serif;
+        }
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+        .settings-menu button {
+            width: 100%;
+            text-align: left;
+            padding: 5px 10px;
+            margin: 5px 0;
+            background-color: #444;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            border-radius: 5px;
+            font-family: 'Arimo', sans-serif;
+        }
+        .settings-menu button:hover {
+            background-color: #555;
+        }
+    </style>
+    <script>
+        function toggleSettings() {
+            const menu = document.getElementById('settings-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function showSignUp() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('signup-form').classList.remove('hidden');
+        }
+
+        function showLogin() {
+            document.getElementById('signup-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        }
+
+        function validateLogin() {
+            const username = document.querySelector('#login-form input[type="text"]').value;
+            const password = document.querySelector('#login-form input[type="password"]').value;
+            const errorMessage = document.getElementById('login-error-message');
+
+            if (!username || !password) {
+                errorMessage.textContent = "Please fill in both fields.";
+                return false;
+            }
+
+            errorMessage.textContent = "";
+            return true;
+        }
+
+        function validateSignUp() {
+            const username = document.querySelector('#signup-form input[placeholder="Username"]').value;
+            const email = document.querySelector('#signup-form input[placeholder="Email"]').value;
+            const password = document.querySelector('#signup-form input[placeholder="Password"]').value;
+            const confirmPassword = document.querySelector('#signup-form input[placeholder="Confirm Password"]').value;
+            const errorMessage = document.getElementById('signup-error-message');
+
+            if (!username || !email || !password || !confirmPassword) {
+                errorMessage.textContent = "Please fill in all fields.";
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Passwords do not match.";
+                return false;
+            }
+
+            errorMessage.textContent = "";
+            return true;
+        }
+
+        function toggleTheme(mode) {
+            if (mode === 'dark') {
+                document.body.style.backgroundColor = '#1a1a1a';
+                document.body.style.color = '#fff';
+                document.querySelectorAll('.container').forEach(container => {
+                    container.style.backgroundColor = '#333';
+                });
+                document.querySelectorAll('.navbar button').forEach(button => {
+                    button.style.backgroundColor = '#444';
+                    button.style.color = '#fff';
+                });
+                document.querySelectorAll('h2').forEach(header => {
+                    header.style.fontFamily = 'Arimo, sans-serif';
+                    header.style.fontWeight = '400';
+                });
+            } else if (mode === 'light') {
+                document.body.style.backgroundColor = '#fff';
+                document.body.style.color = '#000';
+                document.querySelectorAll('.container').forEach(container => {
+                    container.style.backgroundColor = '#fff';
+                });
+                document.querySelectorAll('.navbar button').forEach(button => {
+                    button.style.backgroundColor = '#ddd';
+                    button.style.color = '#000';
+                });
+                document.querySelectorAll('h2').forEach(header => {
+                    header.style.fontFamily = 'Roboto, sans-serif';
+                    header.style.fontWeight = '700';
+                });
+            }
+        }
+
+        function showTermsOfService() {
+            alert("Terms of Service: [Insert your terms of service here]");
+        }
+
+        function redirectToRockRoll() {
+            window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <button onclick="alert('Home not implemented')">Home</button>
+        <button onclick="toggleSettings()">Settings</button>
+        <button onclick="showTermsOfService()">ToS</button>
+    </div>
+    <div class="settings-menu" id="settings-menu">
+        <button onclick="toggleTheme('dark')">Dark Mode</button>
+        <button onclick="toggleTheme('light')">Light Mode</button>
+        <button onclick="redirectToRockRoll()">Debug Mode</button>
+    </div>
+
+    <div class="container" id="login-form">
+        <h2>Add Account</h2>
+        <input type="text" placeholder="Username/Email/Phone">
+        <input type="password" placeholder="Password">
+        <button onclick="validateLogin()">Log In</button>
+        <a href="#">Forgot Password or Username?</a>
+        <button class="alternate-button">Email Me a One-Time Code</button>
+        <button class="alternate-button">Use Another Device</button>
+        <button class="alternate-button" onclick="showSignUp()">Create A New Account</button>
+        <div class="error-message" id="login-error-message"></div>
+    </div>
+    
+    <div class="container hidden" id="signup-form">
+        <h2>Create Account</h2>
+        <input type="text" placeholder="Username">
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <input type="password" placeholder="Confirm Password">
+        <button onclick="validateSignUp()">Sign Up</button>
+        <button class="alternate-button" onclick="showLogin()">Already have an account? Log In</button>
+        <div class="error-message" id="signup-error-message"></div>
+    </div>
+</body>
+</html>
