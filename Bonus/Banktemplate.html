@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyBank - Banking Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 60px; /* Space for fixed header */
+            background-color: #0056b3;
+            overflow: hidden;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 14px 20px;
+        }
+
+        nav ul li a:hover {
+            background-color: #003d7a;
+        }
+
+        main {
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            padding: 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>MyBank</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#account-management">Account Management</a></li>
+            <li><a href="#transfers">Transfers</a></li>
+            <li><a href="#deposit-checks">Deposit Checks</a></li>
+            <li><a href="#bill-payments">Bill Payments</a></li>
+            <li><a href="#financial-planning">Financial Planning</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#customer-support">Customer Support</a></li>
+            <li><a href="#branch-atm-locator">Branch/ATM Locator</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="account-management">
+            <h2>Account Management</h2>
+            <p>View balances, transaction history, and account details.</p>
+            <!-- Example form -->
+            <div class="account-details">
+                <h3>Account Details</h3>
+                <button onclick="viewAccountDetails()">View Details</button>
+                <div id="account-info"></div>
+            </div>
+        </section>
+
+        <section id="transfers">
+            <h2>Transfers</h2>
+            <p>Move money between accounts, send money to other users, or pay bills.</p>
+            <form id="transfer-form">
+                <label for="from-account">From Account:</label>
+                <input type="text" id="from-account" name="from-account" required>
+                <label for="to-account">To Account:</label>
+                <input type="text" id="to-account" name="to-account" required>
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <button type="submit">Transfer</button>
+            </form>
+        </section>
+
+        <section id="deposit-checks">
+            <h2>Deposit Checks</h2>
+            <p>Deposit checks using the app's camera feature.</p>
+            <input type="file" accept="image/*" id="check-photo" onchange="depositCheck()" />
+        </section>
+
+        <section id="bill-payments">
+            <h2>Bill Payments</h2>
+            <p>Set up and manage recurring payments for utilities and other services.</p>
+            <!-- Example form -->
+            <form id="bill-payment-form">
+                <label for="bill-name">Bill Name:</label>
+                <input type="text" id="bill-name" name="bill-name" required>
+                <label for="amount-bill">Amount:</label>
+                <input type="number" id="amount-bill" name="amount-bill" required>
+                <button type="submit">Pay Bill</button>
+            </form>
+        </section>
+
+        <section id="financial-planning">
+            <h2>Financial Planning</h2>
+            <p>Access budgeting tools, savings goals, and spending analysis.</p>
+            <!-- Example content -->
+            <div class="financial-tools">
+                <button onclick="viewBudget()">View Budget</button>
+                <div id="budget-info"></div>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2>Security</h2>
+            <p>Monitor for suspicious activity, set up account alerts, and manage security settings.</p>
+            <!-- Example content -->
+            <button onclick="viewSecurityAlerts()">View Security Alerts</button>
+            <div id="security-alerts"></div>
+        </section>
+
+        <section id="customer-support">
+            <h2>Customer Support</h2>
+            <p>Access help and support features, including chat or phone assistance.</p>
+            <!-- Example chat link -->
+            <button onclick="startChat()">Start Chat</button>
+        </section>
+
+        <section id="branch-atm-locator">
+            <h2>Branch/ATM Locator</h2>
+            <p>Find nearby branches or ATMs.</p>
+            <input type="text" id="location" placeholder="Enter your location">
+            <button onclick="findBranches()">Find Branches</button>
+            <div id="branch-info"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MyBank. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to view account details (placeholder)
+        function viewAccountDetails() {
+            document.getElementById('account-info').innerText = 'Account details would be displayed here.';
+        }
+
+        // Function to handle transfers (placeholder)
+        document.getElementById('transfer-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fromAccount = document.getElementById('from-account').value;
+            const toAccount = document.getElementById('to-account').value;
+            const amount = document.getElementById('amount').value;
+            alert(`Transferring ${amount} from ${fromAccount} to ${toAccount}.`);
+        });
+
+        // Function to handle check deposits (placeholder)
+        function depositCheck() {
+            const fileInput = document.getElementById('check-photo');
+            if (fileInput.files.length > 0) {
+                alert('Check deposited successfully.');
+            }
+        }
+
+        // Function to view budget (placeholder)
+        function viewBudget() {
+            document.getElementById('budget-info').innerText = 'Budget information would be displayed here.';
+        }
+
+        // Function to view security alerts (placeholder)
+        function viewSecurityAlerts() {
+            document.getElementById('security-alerts').innerText = 'Security alerts would be displayed here.';
+        }
+
+        // Function to start a chat (placeholder)
+        function startChat() {
+            alert('Starting chat with customer support.');
+        }
+
+        // Function to find branches (placeholder)
+        function findBranches() {
+            const location = document.getElementById('location').value;
+            document.getElementById('branch-info').innerText = `Searching for branches near ${location}.`;
+        }
+    </script>
+</body>
+  </html>
