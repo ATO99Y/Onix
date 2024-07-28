@@ -18,3 +18,7 @@ new and improved Onix But with limitations and its still under development
 
 1. Onix recommended
 2. Onix Main (out dated)
+
+# Pyterm
+
+A terminal emulator In python (needed to run in termux) First ever Beta Maked By Copilot first Ai to be working
